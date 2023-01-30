@@ -1,0 +1,10 @@
+<h2>Liste de personne</h2>
+
+<button [routerLink]="['/home']">Accueil</button>
+<button [routerLink]="['/personne']">Personne</button>
+
+<ul>
+  <li *ngFor="let personne of personnes">
+    {{ personne.nom }} {{ personne.prenom }}
+  </li>
+</ul>
