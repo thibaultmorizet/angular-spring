@@ -1,7 +1,7 @@
 <h2>Liste de personne</h2>
 
 <button [routerLink]="['/home']">Accueil</button>
-<button [routerLink]="['/personne']">Personne</button>
+<button [routerLink]="['/personne']">Liste personne</button>
 
 <form #personneForm="ngForm" (ngSubmit)="ajouterPersonne()">
   <div>
@@ -30,6 +30,7 @@
 <ul>
   <li *ngFor="let elt of personnes">
     {{ elt.nom }} {{ elt.prenom }}
+    <button [routerLink]="['/detailPersonne', elt.num]">Modifier</button>
     <button (click)="supprimerPersonne(elt.num)">Supprimer</button>
   </li>
 </ul>

@@ -12,14 +12,20 @@ export class PersonneService {
   getPersonnes() {
     return this.http.get<Personne[]>(this.url);
   }
+
   getOnePersonne(id: number | undefined) {
     return this.http.get<Personne>(this.url + '/' + id);
   }
+
   createPersonne(personne: Personne) {
     return this.http.post<Personne>(this.url, personne);
   }
 
   deletePersonne(id: number | undefined) {
     return this.http.delete<{ token: string }>(this.url + '/' + id);
+  }
+
+  updatePersonne(id: number | undefined, personne: Personne) {
+    return this.http.put<{ token: string }>(this.url + '/' + id, personne);
   }
 }

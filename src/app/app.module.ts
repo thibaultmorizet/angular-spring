@@ -7,9 +7,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PersonneComponent } from './components/personne/personne.component';
 import { HomeComponent } from './components/home/home.component';
+import { DetailPersonneComponent } from './components/detail-personne/detail-personne.component';
 
 @NgModule({
-  declarations: [AppComponent, PersonneComponent, HomeComponent],
+  declarations: [AppComponent, PersonneComponent, HomeComponent, DetailPersonneComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
