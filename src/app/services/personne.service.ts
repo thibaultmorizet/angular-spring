@@ -9,7 +9,14 @@ export class PersonneService {
   url: string = 'http://localhost:8080/ws/personnes';
   constructor(private http: HttpClient) {}
 
-  getPersonnes() {    
+  getPersonnes() {
     return this.http.get<Personne[]>(this.url);
+  }
+  createPersonne(personne: Personne) {
+    return this.http.post<Personne>(this.url, personne);
+  }
+
+  deletePersonne(id: number | undefined) {
+    return this.http.delete<{ token: string }>(this.url + '/' + id);
   }
 }

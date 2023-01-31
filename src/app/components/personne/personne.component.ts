@@ -8,6 +8,7 @@ import { PersonneService } from 'src/app/services/personne.service';
   styleUrls: ['./personne.component.css'],
 })
 export class PersonneComponent implements OnInit {
+  personne: Personne = {};
   personnes: Personne[] = [];
   constructor(private personneService: PersonneService) {}
 
@@ -16,8 +17,19 @@ export class PersonneComponent implements OnInit {
   }
 
   initPersonnes() {
-    this.personneService.getPersonnes().subscribe(res => {
+    this.personneService.getPersonnes().subscribe((res) => {
       this.personnes = res;
+    });
+  }
+  ajouterPersonne() {
+    this.personne.adresses = [];
+    this.personneService.createPersonne(this.personne).subscribe((res) => {
+      this.personnes.push(res);
+    });
+  }
+  supprimerPersonne(id: number | undefined) {
+    this.personneService.deletePersonne(id).subscribe((res) => {
+      this.personnes.splice(this.personnes.indexOf(this.personne), 1);
     });
   }
 }
