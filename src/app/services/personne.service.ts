@@ -12,6 +12,9 @@ export class PersonneService {
   getPersonnes() {
     return this.http.get<Personne[]>(this.url);
   }
+  getOnePersonne(id: number | undefined) {
+    return this.http.get<Personne>(this.url + '/' + id);
+  }
   createPersonne(personne: Personne) {
     return this.http.post<Personne>(this.url, personne);
   }

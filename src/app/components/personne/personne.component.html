@@ -6,18 +6,30 @@
 <form #personneForm="ngForm" (ngSubmit)="ajouterPersonne()">
   <div>
     <label for="nom">Nom</label>
-    <input type="text" id="nom" name="nom" [(ngModel)]="personne.nom"/>
+    <input
+      type="text"
+      id="nom"
+      name="nom"
+      [(ngModel)]="personne.nom"
+      required
+    />
   </div>
   <div>
     <label for="prenom">Prenom</label>
-    <input type="text" id="prenom" name="prenom" [(ngModel)]="personne.prenom"/>
+    <input
+      type="text"
+      id="prenom"
+      name="prenom"
+      [(ngModel)]="personne.prenom"
+      required
+    />
   </div>
-  <button>Ajouter</button>
+  <button [disabled]="!personneForm.valid">Ajouter</button>
 </form>
 
 <ul>
-  <li *ngFor="let personne of personnes">
-    {{ personne.nom }} {{ personne.prenom }} <button (click)="supprimerPersonne(personne.num)">Supprimer</button>
-
+  <li *ngFor="let elt of personnes">
+    {{ elt.nom }} {{ elt.prenom }}
+    <button (click)="supprimerPersonne(elt.num)">Supprimer</button>
   </li>
 </ul>

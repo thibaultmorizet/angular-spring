@@ -21,15 +21,25 @@ export class PersonneComponent implements OnInit {
       this.personnes = res;
     });
   }
+
   ajouterPersonne() {
     this.personne.adresses = [];
+
     this.personneService.createPersonne(this.personne).subscribe((res) => {
       this.personnes.push(res);
+      this.personne = {};
     });
   }
+
   supprimerPersonne(id: number | undefined) {
-    this.personneService.deletePersonne(id).subscribe((res) => {
-      this.personnes.splice(this.personnes.indexOf(this.personne), 1);
+    this.personneService.getOnePersonne(id).subscribe((resPersonne) => {
+      this.personneService.deletePersonne(id).subscribe((res) => {
+        this.personnes.forEach((element) => {
+          if (element.num == resPersonne.num) {
+            this.personnes.splice(this.personnes.indexOf(element), 1);
+          }
+        });
+      });
     });
   }
 }
