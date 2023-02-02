@@ -1,0 +1,26 @@
+<h1>Page d'authentification</h1>
+
+<form #personneForm="ngForm" (ngSubmit)="seConnecter()">
+    <div>
+      <label for="username">Nom d'utilisateur</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        [(ngModel)]="user.username"
+        required
+      />
+    </div>
+    <div>
+      <label for="password">Mot de passe</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        [(ngModel)]="user.password"
+        required
+      />
+    </div>
+    <button [disabled]="!personneForm.valid">Ajouter</button>
+  </form>
+  

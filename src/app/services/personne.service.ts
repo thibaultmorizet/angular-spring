@@ -10,11 +10,7 @@ export class PersonneService {
   constructor(private http: HttpClient) {}
 
   getPersonnes() {
-    let user = 'admin : admin';
-    let headers = new HttpHeaders().set('Authorization', 'Basic ' + btoa(user));
-    console.log(headers);
-
-    return this.http.get<Personne[]>(this.url, { headers: headers });
+    return this.http.get<Personne[]>(this.url);
   }
 
   getOnePersonne(id: number | undefined) {
