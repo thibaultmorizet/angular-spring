@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Personne } from '../interfaces/personne';
 
@@ -10,7 +10,11 @@ export class PersonneService {
   constructor(private http: HttpClient) {}
 
   getPersonnes() {
-    return this.http.get<Personne[]>(this.url);
+    let user = 'admin : admin';
+    let headers = new HttpHeaders().set('Authorization', 'Basic ' + btoa(user));
+    console.log(headers);
+
+    return this.http.get<Personne[]>(this.url, { headers: headers });
   }
 
   getOnePersonne(id: number | undefined) {

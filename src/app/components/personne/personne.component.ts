@@ -31,15 +31,13 @@ export class PersonneComponent implements OnInit {
     });
   }
 
-  supprimerPersonne(id: number | undefined) {
-    this.personneService.getOnePersonne(id).subscribe((resPersonne) => {
-      this.personneService.deletePersonne(id).subscribe((res) => {
-        this.personnes.forEach((element) => {
-          if (element.num == resPersonne.num) {
-            this.personnes.splice(this.personnes.indexOf(element), 1);
-          }
-        });
-      });
+  supprimerPersonne(num: number = -1) {
+    this.personneService.deletePersonne(num).subscribe({
+      next: (res) => {
+        const index = this.personnes.findIndex((elt) => elt.num == num);
+        this.personnes.splice(index, 1);
+      },
+      error: (erreur) => alert('Suppression impossible'),
     });
   }
 }
