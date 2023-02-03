@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
+import jwtDecode from 'jwt-decode';
 import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpHeaders,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
-import jwtDecode from 'jwt-decode';
 import { User } from '../interfaces/user';
 
 @Injectable()
@@ -26,6 +25,8 @@ export class AuthInterceptor implements HttpInterceptor {
       const decoded: { exp: number } = jwtDecode(accessToken);
       const exp: number = decoded['exp'] * 1000;
       if (Date.now() > exp) {
+        console.log(refreshToken);
+
         const user: User = {
           grantType: 'refreshToken',
           refreshToken: refreshToken,

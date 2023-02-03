@@ -5,39 +5,27 @@ import { PersonneService } from 'src/app/services/personne.service';
 @Component({
   selector: 'app-personne',
   templateUrl: './personne.component.html',
-  styleUrls: ['./personne.component.css'],
+  styleUrls: ['./personne.component.css']
 })
 export class PersonneComponent implements OnInit {
-  personne: Personne = {};
+  personne: Personne = {}
   personnes: Personne[] = [];
-  constructor(private personneService: PersonneService) {}
-
+  constructor(private personneService: PersonneService) { }
   ngOnInit(): void {
-    this.initPersonnes();
-  }
-
-  initPersonnes() {
-    this.personneService.getPersonnes().subscribe((res) => {
+    this.personneService.getPersonnes().subscribe(res => {
       this.personnes = res;
-    });
+    })
   }
-
   ajouterPersonne() {
-    this.personne.adresses = [];
-
-    this.personneService.createPersonne(this.personne).subscribe((res) => {
+    this.personneService.addPersonne({ ... this.personne, adresses: [] }).subscribe(res => {
       this.personnes.push(res);
-      this.personne = {};
-    });
+      this.personne = {}
+    })
   }
-
-  supprimerPersonne(num: number = -1) {
-    this.personneService.deletePersonne(num).subscribe({
-      next: (res) => {
-        const index = this.personnes.findIndex((elt) => elt.num == num);
-        this.personnes.splice(index, 1);
-      },
-      error: (erreur) => alert('Suppression impossible'),
-    });
+  supprimer(p: Personne) {
+    const indice = this.personnes.findIndex(elt => elt.num == p.num);
+    this.personnes.splice(indice, 1)
   }
 }
+
+

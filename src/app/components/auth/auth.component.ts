@@ -1,24 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { NotifyService } from 'src/app/services/notify.service';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css'],
+  styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnInit {
-  user: User = { grantType: 'password' };
-
-  constructor(private as: AuthService, private router: Router) {}
-
-  ngOnInit(): void {}
-
+export class AuthComponent {
+  user: User = { grantType: "password" }
+  constructor(private as: AuthService, private router: Router, private ns: NotifyService) {}
   seConnecter() {
-    this.as.login(this.user).subscribe((res) => {
+    this.as.login(this.user).subscribe(res => {
       this.as.saveInSession(res);
-      this.router.navigateByUrl('/personne');
-    });
+      this.ns.sendData(this.user.username ?? "")
+      this.router.navigateByUrl("/personne")
+    })
+
   }
 }

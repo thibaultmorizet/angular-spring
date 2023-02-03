@@ -1,36 +1,21 @@
-<h2>Liste de personne</h2>
-
-<button [routerLink]="['/home']">Accueil</button>
-<button [routerLink]="['/personne']">Liste personne</button>
-
-<form #personneForm="ngForm" (ngSubmit)="ajouterPersonne()">
-  <div>
-    <label for="nom">Nom</label>
-    <input
-      type="text"
-      id="nom"
-      name="nom"
-      [(ngModel)]="personne.nom"
-      required
-    />
-  </div>
-  <div>
-    <label for="prenom">Prenom</label>
-    <input
-      type="text"
-      id="prenom"
-      name="prenom"
-      [(ngModel)]="personne.prenom"
-      required
-    />
-  </div>
-  <button [disabled]="!personneForm.valid">Ajouter</button>
+<h2>Liste de personnes</h2>
+<form (ngSubmit)="ajouterPersonne()" #monForm=ngForm >
+    <div>
+        <label for="nom">Nom</label>
+        <input type="text" id="nom" [(ngModel)]="personne.nom" name="nom" required minlength="2">
+    </div>
+    <div>
+        <label for="prenom">Prénom</label>
+        <input type="text" id="prenom" [(ngModel)]="personne.prenom" name="prenom" required minlength="2">
+    </div>
+    <button [disabled]="monForm.invalid">
+        Ajouter
+    </button>
 </form>
 
+
 <ul>
-  <li *ngFor="let elt of personnes">
-    {{ elt.nom }} {{ elt.prenom }}
-    <button [routerLink]="['/detailPersonne', elt.num]">Modifier</button>
-    <button (click)="supprimerPersonne(elt.num)">Supprimer</button>
-  </li>
+    <ng-container *ngFor="let elt of personnes">
+        <app-details-personne [personne]="elt" (message)="supprimer($event)"></app-details-personne> 
+    </ng-container>
 </ul>

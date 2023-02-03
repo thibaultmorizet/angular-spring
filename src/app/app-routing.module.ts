@@ -1,19 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthComponent } from './components/auth/auth.component';
-import { DetailPersonneComponent } from './components/detail-personne/detail-personne.component';
-import { HomeComponent } from './components/home/home.component';
 import { PersonneComponent } from './components/personne/personne.component';
+import { AuthComponent } from './components/auth/auth.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'auth', component: AuthComponent },
-  { path: 'personne', component: PersonneComponent },
-  { path: 'detailPersonne/:id', component: DetailPersonneComponent },
+  { path: "personne", component: PersonneComponent },
+  { path: "auth", component: AuthComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
